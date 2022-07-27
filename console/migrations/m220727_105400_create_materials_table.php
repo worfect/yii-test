@@ -14,8 +14,8 @@ class m220727_105400_create_materials_table extends Migration
     {
         $this->createTable('{{%materials}}', [
             'id' => $this->primaryKey(),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'updated_at' => $this->timestamp(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'type_id' => $this->integer(),
             'category_id' => $this->integer(),
             'title' => $this->string()->notNull(),

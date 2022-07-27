@@ -14,8 +14,8 @@ class m220727_105300_create_tags_table extends Migration
     {
         $this->createTable('{{%tags}}', [
             'id' => $this->primaryKey(),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
+            'updated_at' => $this->timestamp(),
+            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
             'title' => $this->string()->notNull()->unique(),
         ]);
     }
