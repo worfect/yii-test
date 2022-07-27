@@ -1,0 +1,73 @@
+version: "3.7"
+
+services:
+
+  webserver:
+    build:
+      context: ./docker/nginx
+    volumes:
+      - ./:/app
+    ports:
+      - "81:81"
+      - "82:82"
+
+  backend:
+    build:
+      context: ./docker
+      dockerfile: backend/Dockerfile
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+    environment:
+      PHP_IDE_CONFIG: serverName=TEST
+
+  frontend:
+    build:
+      context: ./docker
+      dockerfile: frontend/Dockerfile
+    volumes:
+      # Re-use local composer cache via host-volume
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      # Mount source-code for development
+      - ./:/app
+    environment:
+      PHP_IDE_CONFIG: serverName=TEST
+
+  cli:
+    build:
+      context: ./docker
+      dockerfile: cli/Dockerfile
+    volumes:
+      - ./:/app
+
+  postgres:
+    image: postgres:14.3-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: secret
+      POSTGRES_DB: app
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    ports:
+      - "54321:5432"
+
+  adminer:
+    build:
+      context: ./docker
+      dockerfile: adminer/Dockerfile
+    ports:
+      - "8080:8080"
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 122.122.221.0/28
+
+volumes:
+  postgres:
