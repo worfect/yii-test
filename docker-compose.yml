@@ -35,12 +35,12 @@ services:
     environment:
       PHP_IDE_CONFIG: serverName=TEST
 
-  cli:
-    build:
-      context: ./docker
-      dockerfile: cli/Dockerfile
-    volumes:
-      - ./:/app
+#  cli:
+#    build:
+#      context: ./docker
+#      dockerfile: cli/Dockerfile
+#    volumes:
+#      - ./:/app
 
   postgres:
     image: postgres:14.3-alpine

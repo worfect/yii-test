@@ -19,7 +19,7 @@ namespace common\models;
  * @property int $updated_at [timestamp(0)]
  * @property int $created_at [timestamp(0)]
  */
-final class Material extends BaseActiveRecord
+class Material extends BaseActiveRecord
 {
 
     public static function tableName(): string
