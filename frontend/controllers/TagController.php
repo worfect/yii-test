@@ -3,6 +3,7 @@
 namespace frontend\controllers;
 
 use common\models\Tag;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -29,6 +30,8 @@ class TagController extends Controller
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
+                        'bind' => ['POST'],
+                        'unbind' => ['POST'],
                     ],
                 ],
             ]
@@ -122,5 +125,31 @@ class TagController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionBind()
+    {
+        $materialId = $this->request->post('materialId');
+        $tagId =  $this->request->post('Tag')['id'];
+
+        Yii::$app->db->createCommand()->insert('material_tag', [
+            'material_id' => $materialId,
+            'tag_id' => $tagId,
+        ])->execute();
+
+        return $this->redirect(["material/view?id=$materialId"]);
+    }
+
+    public function actionUnbind( )
+    {
+        $materialId = $this->request->get('materialId');
+        $tagId =  $this->request->get('tagId');
+        Yii::$app->db->createCommand('DELETE FROM "material_tag" WHERE material_id=:materialId AND tag_id=:tagId', [
+            ':materialId' => $materialId,
+            ':tagId' => $tagId
+        ])->execute();
+
+        return $this->redirect(["material/view?id=$materialId"]);
+
     }
 }

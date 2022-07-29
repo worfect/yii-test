@@ -27,7 +27,7 @@ AppAsset::register($this);
             <?php
             NavBar::begin([
                 'brandLabel' => Yii::$app->name,
-                'brandUrl' => '/material/index',
+                'brandUrl' => '/',
                 'options' => [
                     'class' => 'navbar navbar-expand-lg navbar-light bg-light',
                 ],

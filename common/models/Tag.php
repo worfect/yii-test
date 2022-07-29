@@ -29,6 +29,7 @@ final class Tag extends BaseActiveRecord
             [['title'], 'required', 'message' => 'Пожалуйста, заполните поле'],
             [['title'], 'string', 'max' => 255],
             [['title'], 'unique', 'message' => 'Такое значение уже используется'],
+
         ];
     }
 
