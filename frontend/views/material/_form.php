@@ -15,7 +15,7 @@ use yii\widgets\ActiveForm;
 ]); ?>
 
     <?=$form->field($material, 'type_id',[
-        'template' => '{input}<label for="floatingSelectType">Тип</label>',
+        'template' => '{input}{error}<label for="floatingSelectType">Тип</label>',
         'inputOptions' => [
             'id' => 'floatingSelectType',
             'class' => 'form-select',
@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     )->label(false)?>
 
     <?=$form->field($material, 'category_id',[
-        'template' => '{input}<label for="floatingSelectType">Категория</label>',
+        'template' => '{input}{error}<label for="floatingSelectType">Категория</label>',
         'inputOptions' => [
             'id' => 'floatingSelectCategory',
             'class' => 'form-select',
@@ -39,7 +39,7 @@ use yii\widgets\ActiveForm;
     )->label(false)?>
 
     <?= $form->field($material, 'title', [
-    'template' => '{input}<label for="floatingSelectType">Название</label>',
+    'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
         'inputOptions' => [
             'id' => 'floatingTitle',
             'class' => 'form-control',
@@ -48,7 +48,7 @@ use yii\widgets\ActiveForm;
     ])->textInput(['maxlength' => true])->label(false) ?>
 
     <?= $form->field($material, 'author', [
-        'template' => '{input}<label for="floatingSelectType">Автор</label>',
+        'template' => '{input}{error}<label for="floatingSelectType">Автор</label>',
         'inputOptions' => [
             'id' => 'floatingAuthor',
             'class' => 'form-control',
@@ -57,13 +57,13 @@ use yii\widgets\ActiveForm;
     ])->textInput(['maxlength' => true])->label(false) ?>
 
     <?= $form->field($material, 'description', [
-        'template' => '{input}<label for="floatingSelectType">Описание</label>',
+        'template' => '{input}{error}<label for="floatingSelectType">Описание</label>',
         'inputOptions' => [
             'id' => 'floatingDescription',
             'class' => 'form-control',
             'placeholder' => 'placeholder',
         ],
-    ])->textInput(['maxlength' => true])->textarea()->label(false)?>
+    ])->textInput(['maxlength' => true])->textarea(['rows' => '6'])->label(false)?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>

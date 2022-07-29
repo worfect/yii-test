@@ -4,6 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Tag;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +25,9 @@ class TagController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
+                        'index'  => ['GET'],
+                        'create' => ['GET', 'POST'],
+                        'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
                     ],
                 ],
@@ -40,33 +44,10 @@ class TagController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Tag::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Tag model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -80,8 +61,9 @@ class TagController extends Controller
         $model = new Tag();
 
         if ($this->request->isPost) {
+
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -104,7 +86,7 @@ class TagController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [

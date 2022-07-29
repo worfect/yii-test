@@ -7,6 +7,7 @@ use common\models\Material;
 use common\models\MaterialSearch;
 use common\models\Tag;
 use common\models\Type;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -27,6 +28,9 @@ class MaterialController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
+                        'index'  => ['GET'],
+                        'create' => ['GET', 'POST'],
+                        'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
                     ],
                 ],

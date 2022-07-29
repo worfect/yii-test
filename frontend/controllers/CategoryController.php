@@ -3,7 +3,9 @@
 namespace frontend\controllers;
 
 use common\models\Category;
+use Yii;
 use yii\data\ActiveDataProvider;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -24,6 +26,9 @@ class CategoryController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
+                        'index'  => ['GET'],
+                        'create' => ['GET', 'POST'],
+                        'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
                     ],
                 ],
@@ -40,33 +45,10 @@ class CategoryController extends Controller
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Category::find(),
-            /*
-            'pagination' => [
-                'pageSize' => 50
-            ],
-            'sort' => [
-                'defaultOrder' => [
-                    'id' => SORT_DESC,
-                ]
-            ],
-            */
         ]);
 
         return $this->render('index', [
             'dataProvider' => $dataProvider,
-        ]);
-    }
-
-    /**
-     * Displays a single Category model.
-     * @param int $id
-     * @return string
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
         ]);
     }
 
@@ -81,7 +63,7 @@ class CategoryController extends Controller
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+                return $this->redirect(['index']);
             }
         } else {
             $model->loadDefaultValues();
@@ -104,7 +86,7 @@ class CategoryController extends Controller
         $model = $this->findModel($id);
 
         if ($this->request->isPost && $model->load($this->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['index']);
         }
 
         return $this->render('update', [
@@ -121,7 +103,11 @@ class CategoryController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        if($this->findModel($id)->getMaterial()->exists()){
+            Yii::$app->session->setFlash('error', "Невозможно удалить");
+        }else{
+            $this->findModel($id)->delete();
+        }
 
         return $this->redirect(['index']);
     }

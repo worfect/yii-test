@@ -44,6 +44,7 @@ AppAsset::register($this);
             NavBar::end();
             ?>
             <div class="container">
+                <?= common\widgets\Alert::widget() ?>
                 <?= $content ?>
             </div>
         </div>

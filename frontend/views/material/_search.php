@@ -1,6 +1,5 @@
 <?php
 
-use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
@@ -13,15 +12,12 @@ use yii\widgets\ActiveForm;
     'method' => 'get',
 ]); ?>
 
-    <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder=""
-               aria-label="Example text with button addon" aria-describedby="button-addon1" name="search-query" value="">
-        <?= Html::submitButton('Искать', ['class' => 'btn btn-primary', 'type' => 'submit', 'id' =>'button-addon1']) ?>
-    </div>
-
-
-<div class="material-search">
-
+        <?=$form->field($model, 'title',[
+            'options' => [
+                'class' => 'input-group mb-3',
+            ],
+            'template' => '{input}<button type="submit" class="btn btn-primary">Искать</button>',
+        ])?>
 
 <?php ActiveForm::end(); ?>
 
