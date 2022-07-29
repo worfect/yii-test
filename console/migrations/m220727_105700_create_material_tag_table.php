@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%material_tag}}`.
  */
-class m220727_105700_create_material_tag_table extends Migration
+final class m220727_105700_create_material_tag_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,6 @@ class m220727_105700_create_material_tag_table extends Migration
         );
 
         $this->addPrimaryKey('pk-material_tag', 'material_tag', ['material_id', 'tag_id']);
-
     }
 
     /**

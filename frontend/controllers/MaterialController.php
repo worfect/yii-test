@@ -7,18 +7,17 @@ use common\models\Material;
 use common\models\MaterialSearch;
 use common\models\Tag;
 use common\models\Type;
-use yii\helpers\VarDumper;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * MaterialController implements the CRUD actions for Material model.
  */
-class MaterialController extends Controller
+final class MaterialController extends Controller
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function behaviors()
     {
@@ -28,7 +27,7 @@ class MaterialController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'index'  => ['GET'],
+                        'index' => ['GET'],
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
@@ -57,12 +56,11 @@ class MaterialController extends Controller
     /**
      * Displays a single Material model.
      * @param int $id
-     * @return string
      * @throws NotFoundHttpException if the model cannot be found
+     * @return string
      */
     public function actionView($id)
     {
-
         return $this->render('view', [
             'material' => $this->findModel($id),
             'tag' => new Tag(),
@@ -99,8 +97,8 @@ class MaterialController extends Controller
      * Updates an existing Material model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id
-     * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -123,8 +121,8 @@ class MaterialController extends Controller
      * Deletes an existing Material model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id
-     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -137,8 +135,8 @@ class MaterialController extends Controller
      * Finds the Material model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id
-     * @return Material the loaded model
      * @throws NotFoundHttpException if the model cannot be found
+     * @return Material the loaded model
      */
     protected function findModel($id)
     {

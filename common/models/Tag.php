@@ -5,7 +5,7 @@ namespace common\models;
 use yii\db\ActiveQuery;
 
 /**
- * Tag model
+ * Tag model.
  *
  * @property int $id
  * @property string $title
@@ -14,7 +14,6 @@ use yii\db\ActiveQuery;
  */
 final class Tag extends BaseActiveRecord
 {
-
     public static function tableName(): string
     {
         return '{{tags}}';
@@ -29,7 +28,6 @@ final class Tag extends BaseActiveRecord
             [['title'], 'required', 'message' => 'Пожалуйста, заполните поле'],
             [['title'], 'string', 'max' => 255],
             [['title'], 'unique', 'message' => 'Такое значение уже используется'],
-
         ];
     }
 

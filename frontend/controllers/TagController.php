@@ -5,18 +5,17 @@ namespace frontend\controllers;
 use common\models\Tag;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * TagController implements the CRUD actions for Tag model.
  */
-class TagController extends Controller
+final class TagController extends Controller
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function behaviors()
     {
@@ -26,7 +25,7 @@ class TagController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'index'  => ['GET'],
+                        'index' => ['GET'],
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
@@ -64,7 +63,6 @@ class TagController extends Controller
         $model = new Tag();
 
         if ($this->request->isPost) {
-
             if ($model->load($this->request->post()) && $model->save()) {
                 return $this->redirect(['index']);
             }
@@ -81,8 +79,8 @@ class TagController extends Controller
      * Updates an existing Tag model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id
-     * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
@@ -101,8 +99,8 @@ class TagController extends Controller
      * Deletes an existing Tag model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id
-     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
@@ -111,12 +109,37 @@ class TagController extends Controller
         return $this->redirect(['index']);
     }
 
+    public function actionBind()
+    {
+        $materialId = $this->request->post('materialId');
+        $tagId = $this->request->post('Tag')['id'];
+
+        Yii::$app->db->createCommand()->insert('material_tag', [
+            'material_id' => $materialId,
+            'tag_id' => $tagId,
+        ])->execute();
+
+        return $this->redirect(["material/view?id={$materialId}"]);
+    }
+
+    public function actionUnbind()
+    {
+        $materialId = $this->request->get('materialId');
+        $tagId = $this->request->get('tagId');
+        Yii::$app->db->createCommand('DELETE FROM "material_tag" WHERE material_id=:materialId AND tag_id=:tagId', [
+            ':materialId' => $materialId,
+            ':tagId' => $tagId,
+        ])->execute();
+
+        return $this->redirect(["material/view?id={$materialId}"]);
+    }
+
     /**
      * Finds the Tag model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id
-     * @return Tag the loaded model
      * @throws NotFoundHttpException if the model cannot be found
+     * @return Tag the loaded model
      */
     protected function findModel($id)
     {
@@ -125,31 +148,5 @@ class TagController extends Controller
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
-    }
-
-    public function actionBind()
-    {
-        $materialId = $this->request->post('materialId');
-        $tagId =  $this->request->post('Tag')['id'];
-
-        Yii::$app->db->createCommand()->insert('material_tag', [
-            'material_id' => $materialId,
-            'tag_id' => $tagId,
-        ])->execute();
-
-        return $this->redirect(["material/view?id=$materialId"]);
-    }
-
-    public function actionUnbind( )
-    {
-        $materialId = $this->request->get('materialId');
-        $tagId =  $this->request->get('tagId');
-        Yii::$app->db->createCommand('DELETE FROM "material_tag" WHERE material_id=:materialId AND tag_id=:tagId', [
-            ':materialId' => $materialId,
-            ':tagId' => $tagId
-        ])->execute();
-
-        return $this->redirect(["material/view?id=$materialId"]);
-
     }
 }

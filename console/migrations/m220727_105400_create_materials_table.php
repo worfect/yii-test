@@ -5,7 +5,7 @@ use yii\db\Migration;
 /**
  * Handles the creation of table `{{%materials}}`.
  */
-class m220727_105400_create_materials_table extends Migration
+final class m220727_105400_create_materials_table extends Migration
 {
     /**
      * {@inheritdoc}
@@ -21,7 +21,7 @@ class m220727_105400_create_materials_table extends Migration
             'title' => $this->string()->notNull(),
             'description' => $this->string(),
             'author' => $this->string(),
-            'links_json' => $this->json()
+            'links_json' => $this->json(),
         ]);
 
         $this->addForeignKey(

@@ -5,7 +5,7 @@ namespace common\models;
 use yii\db\ActiveQuery;
 
 /**
- * Type model
+ * Type model.
  *
  * @property int $id
  * @property string $title
@@ -14,7 +14,6 @@ use yii\db\ActiveQuery;
  */
 final class Type extends BaseActiveRecord
 {
-
     public static function tableName(): string
     {
         return '{{types}}';

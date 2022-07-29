@@ -8,9 +8,8 @@ use yii\data\ActiveDataProvider;
 /**
  * MaterialSearch represents the model behind the search form of `common\models\Material`.
  */
-class MaterialSearch extends Material
+final class MaterialSearch extends Material
 {
-
     /**
      * {@inheritdoc}
      */
@@ -20,7 +19,7 @@ class MaterialSearch extends Material
     }
 
     /**
-     * Creates data provider instance with search query applied
+     * Creates data provider instance with search query applied.
      *
      * @param array $params
      *
@@ -30,16 +29,16 @@ class MaterialSearch extends Material
     {
         $this->load($params);
 
-        if($this->title){
-            $query =  Material::find()
+        if ($this->title) {
+            $query = Material::find()
                 ->joinWith('category')
                 ->joinWith('tag')
                 ->where(['ILIKE', 'materials.author', $this->title])
                 ->orWhere(['ILIKE', 'materials.title', $this->title])
                 ->orWhere(['ILIKE', 'categories.title', $this->title])
                 ->orWhere(['ILIKE', 'tags.title', $this->title]);
-        } else{
-            $query =  Material::find();
+        } else {
+            $query = Material::find();
         }
 
         return new ActiveDataProvider([

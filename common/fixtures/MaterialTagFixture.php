@@ -4,7 +4,7 @@ namespace common\fixtures;
 
 use yii\test\ActiveFixture;
 
-class MaterialTagFixture extends ActiveFixture
+final class MaterialTagFixture extends ActiveFixture
 {
     public $tableName = 'material_tag';
 

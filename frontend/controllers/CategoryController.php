@@ -5,10 +5,9 @@ namespace frontend\controllers;
 use common\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
-use yii\helpers\VarDumper;
+use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 
 /**
  * CategoryController implements the CRUD actions for Category model.
@@ -16,9 +15,10 @@ use yii\filters\VerbFilter;
 class CategoryController extends Controller
 {
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
-    public function behaviors()
+    public
+    function behaviors()
     {
         return array_merge(
             parent::behaviors(),
@@ -26,7 +26,7 @@ class CategoryController extends Controller
                 'verbs' => [
                     'class' => VerbFilter::className(),
                     'actions' => [
-                        'index'  => ['GET'],
+                        'index' => ['GET'],
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
@@ -98,14 +98,14 @@ class CategoryController extends Controller
      * Deletes an existing Category model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id
-     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
+     * @return \yii\web\Response
      */
     public function actionDelete($id)
     {
-        if($this->findModel($id)->getMaterial()->exists()){
-            Yii::$app->session->setFlash('error', "Невозможно удалить");
-        }else{
+        if ($this->findModel($id)->getMaterial()->exists()) {
+            Yii::$app->session->setFlash('error', 'Невозможно удалить');
+        } else {
             $this->findModel($id)->delete();
         }
 
@@ -116,8 +116,8 @@ class CategoryController extends Controller
      * Finds the Category model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id
-     * @return Category the loaded model
      * @throws NotFoundHttpException if the model cannot be found
+     * @return Category the loaded model
      */
     protected function findModel($id)
     {

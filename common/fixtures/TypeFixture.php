@@ -4,7 +4,7 @@ namespace common\fixtures;
 
 use yii\test\ActiveFixture;
 
-class TypeFixture extends ActiveFixture
+final class TypeFixture extends ActiveFixture
 {
     public $modelClass = 'common\models\Type';
 

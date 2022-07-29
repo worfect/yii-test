@@ -17,8 +17,8 @@ use yii\widgets\ActiveForm;
 
 <h3>Теги</h3>
 
-    <?=$form->field($material, 'id')->hiddenInput(['name' => 'materialId'])->label(false)?>
-    <?=$form->field($tag, 'id',[
+    <?php echo $form->field($material, 'id')->hiddenInput(['name' => 'materialId'])->label(false); ?>
+    <?php echo $form->field($tag, 'id', [
         'options' => [
             'class' => 'input-group mb-3',
         ],
@@ -28,7 +28,7 @@ use yii\widgets\ActiveForm;
         ],
     ])->dropdownList(
         $tag::find()->select(['title'])->indexBy('id')->column(),
-    )->label(false)?>
+    )->label(false); ?>
 
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();
 

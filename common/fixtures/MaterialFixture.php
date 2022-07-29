@@ -5,7 +5,7 @@ namespace common\fixtures;
 use Faker\Factory;
 use yii\test\ActiveFixture;
 
-class MaterialFixture extends ActiveFixture
+final class MaterialFixture extends ActiveFixture
 {
     public $modelClass = 'common\models\Material';
 
@@ -15,15 +15,14 @@ class MaterialFixture extends ActiveFixture
         $fixtures = [];
 
         for ($i = 20; $i > 0; --$i) {
-
             $links = [];
 
             for ($j = 4; $j > 0; --$j) {
-               $links[] = [
-                   'url' => $faker->url(),
-                   'title' => $faker->text(40),
-                   'id' => $j
-               ];
+                $links[] = [
+                    'url' => $faker->url(),
+                    'title' => $faker->text(40),
+                    'id' => $j,
+                ];
             }
             $fixtures[] = [
                 'title' => $faker->text(20),

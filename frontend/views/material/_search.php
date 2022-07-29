@@ -12,13 +12,13 @@ use yii\widgets\ActiveForm;
     'method' => 'get',
 ]); ?>
 
-        <?=$form->field($model, 'title',[
+        <?php echo $form->field($model, 'title', [
             'options' => [
                 'class' => 'input-group mb-3',
             ],
             'template' => '{input}<button type="submit" class="btn btn-primary">Искать</button>',
-        ])?>
+        ]); ?>
 
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();
 
 

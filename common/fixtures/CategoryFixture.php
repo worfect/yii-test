@@ -5,7 +5,7 @@ namespace common\fixtures;
 use Faker\Factory;
 use yii\test\ActiveFixture;
 
-class CategoryFixture extends ActiveFixture
+final class CategoryFixture extends ActiveFixture
 {
     public $modelClass = 'common\models\Category';
 

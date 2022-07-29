@@ -11,20 +11,20 @@ use yii\widgets\ActiveForm;
     'fieldConfig' => ['options' => ['class' => 'form-floating mb-3']],
 ]); ?>
 
-    <?= $form->field($model, 'title',[
+    <?php echo $form->field($model, 'title', [
         'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
         'inputOptions' => [
             'id' => 'floatingSelectCategory',
             'class' => 'form-control',
             'placeholder' => 'placeholder',
-            ]
-        ]) ?>
+        ],
+    ]); ?>
 
 <div class="form-group">
-    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+    <?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
 </div>
 
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();
 
 
 

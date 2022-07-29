@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     'fieldConfig' => ['options' => ['class' => 'form-floating mb-3']],
 ]); ?>
 
-    <?=$form->field($material, 'type_id',[
+    <?php echo $form->field($material, 'type_id', [
         'template' => '{input}{error}<label for="floatingSelectType">Тип</label>',
         'inputOptions' => [
             'id' => 'floatingSelectType',
@@ -23,10 +23,10 @@ use yii\widgets\ActiveForm;
         ],
     ])->dropdownList(
         $type::find()->select(['title', 'id'])->indexBy('id')->column(),
-        ['prompt'=>'Выберите тип']
-    )->label(false)?>
+        ['prompt' => 'Выберите тип']
+    )->label(false); ?>
 
-    <?=$form->field($material, 'category_id',[
+    <?php echo $form->field($material, 'category_id', [
         'template' => '{input}{error}<label for="floatingSelectType">Категория</label>',
         'inputOptions' => [
             'id' => 'floatingSelectCategory',
@@ -35,38 +35,38 @@ use yii\widgets\ActiveForm;
         ],
     ])->dropdownList(
         $category::find()->select(['title', 'id'])->indexBy('id')->column(),
-        ['prompt'=>'Выберите категорию']
-    )->label(false)?>
+        ['prompt' => 'Выберите категорию']
+    )->label(false); ?>
 
-    <?= $form->field($material, 'title', [
-    'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
+    <?php echo $form->field($material, 'title', [
+        'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
         'inputOptions' => [
             'id' => 'floatingTitle',
             'class' => 'form-control',
             'placeholder' => 'placeholder',
         ],
-    ])->textInput(['maxlength' => true])->label(false) ?>
+    ])->textInput(['maxlength' => true])->label(false); ?>
 
-    <?= $form->field($material, 'author', [
+    <?php echo $form->field($material, 'author', [
         'template' => '{input}{error}<label for="floatingSelectType">Автор</label>',
         'inputOptions' => [
             'id' => 'floatingAuthor',
             'class' => 'form-control',
             'placeholder' => 'placeholder',
         ],
-    ])->textInput(['maxlength' => true])->label(false) ?>
+    ])->textInput(['maxlength' => true])->label(false); ?>
 
-    <?= $form->field($material, 'description', [
+    <?php echo $form->field($material, 'description', [
         'template' => '{input}{error}<label for="floatingSelectType">Описание</label>',
         'inputOptions' => [
             'id' => 'floatingDescription',
             'class' => 'form-control',
             'placeholder' => 'placeholder',
         ],
-    ])->textInput(['maxlength' => true])->textarea(['rows' => '6'])->label(false)?>
+    ])->textInput(['maxlength' => true])->textarea(['rows' => '6'])->label(false); ?>
 
     <div class="form-group">
-        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']) ?>
+        <?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
     </div>
 
-<?php ActiveForm::end(); ?>
+<?php ActiveForm::end();

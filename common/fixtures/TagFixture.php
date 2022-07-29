@@ -5,7 +5,7 @@ namespace common\fixtures;
 use Faker\Factory;
 use yii\test\ActiveFixture;
 
-class TagFixture extends ActiveFixture
+final class TagFixture extends ActiveFixture
 {
     public $modelClass = 'common\models\Tag';
 
