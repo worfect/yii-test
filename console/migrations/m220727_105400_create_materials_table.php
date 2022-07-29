@@ -21,6 +21,7 @@ class m220727_105400_create_materials_table extends Migration
             'title' => $this->string()->notNull(),
             'description' => $this->string(),
             'author' => $this->string(),
+            'links_json' => $this->json()
         ]);
 
         $this->addForeignKey(

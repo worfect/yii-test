@@ -3,7 +3,6 @@
 namespace frontend\controllers;
 
 use common\models\Category;
-use common\models\Link;
 use common\models\Material;
 use common\models\MaterialSearch;
 use common\models\Tag;
@@ -62,7 +61,6 @@ class MaterialController extends Controller
 
         return $this->render('view', [
             'material' => $this->findModel($id),
-            'link' => new Link(),
             'tag' => new Tag(),
         ]);
     }
