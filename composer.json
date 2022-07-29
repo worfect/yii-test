@@ -28,7 +28,12 @@
         "codeception/module-yii2": "^1.0",
         "codeception/module-filesystem": "^1.0",
         "codeception/verify": "~0.5.0 || ~1.1.0",
-        "symfony/browser-kit": ">=2.7 <=4.2.4"
+        "symfony/browser-kit": ">=2.7 <=4.2.4",
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "vimeo/psalm": "^4.24"
+    },
+    "scripts": {
+        "php-cs-fixer": "php-cs-fixer --config=.php-cs-fixer.php --allow-risky=yes"
     },
     "config": {
         "process-timeout": 1800,
