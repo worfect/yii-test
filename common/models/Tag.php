@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * Tag model
  *
@@ -18,7 +20,19 @@ final class Tag extends BaseActiveRecord
         return '{{tags}}';
     }
 
-    public function getMaterial()
+    /**
+     * {@inheritdoc}
+     */
+    public function rules(): array
+    {
+        return [
+            [['title'], 'required', 'message' => 'Пожалуйста, заполните поле'],
+            [['title'], 'string', 'max' => 255],
+            [['title'], 'unique', 'message' => 'Такое значение уже используется'],
+        ];
+    }
+
+    public function getMaterial(): ActiveQuery
     {
         return $this->hasMany(Material::class, ['id' => 'material_id'])
             ->viaTable('material_tag', ['tag_id' => 'id']);

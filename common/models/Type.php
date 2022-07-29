@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * Type model
  *
@@ -18,8 +20,8 @@ final class Type extends BaseActiveRecord
         return '{{types}}';
     }
 
-    public function getMaterial()
+    public function getMaterial(): ActiveQuery
     {
-        return $this->hasMany(Material::class, ['id' => 'material_id']);
+        return $this->hasMany(Material::class, ['material_id' => 'id']);
     }
 }

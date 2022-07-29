@@ -2,6 +2,8 @@
 
 namespace common\models;
 
+use yii\db\ActiveQuery;
+
 /**
  * Category model
  *
@@ -18,8 +20,20 @@ final class Category extends BaseActiveRecord
         return '{{categories}}';
     }
 
-    public function getMaterial()
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
     {
-        return $this->hasMany(Material::class, ['id' => 'material_id']);
+        return [
+            [['title'], 'required', 'message' => 'Пожалуйста, заполните поле'],
+            [['title'], 'string', 'max' => 255],
+            [['title'], 'unique', 'message' => 'Такое значение уже используется'],
+        ];
+    }
+
+    public function getMaterial(): ActiveQuery
+    {
+        return $this->hasMany(Material::class, ['category_id' => 'id']);
     }
 }

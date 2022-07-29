@@ -4,30 +4,18 @@ namespace common\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Material;
 
 /**
  * MaterialSearch represents the model behind the search form of `common\models\Material`.
  */
 class MaterialSearch extends Material
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['id', 'type_id', 'category_id'], 'integer'],
-            [['updated_at', 'created_at', 'title', 'description', 'author'], 'safe'],
-        ];
-    }
 
     /**
      * {@inheritdoc}
      */
     public function scenarios()
     {
-        // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
 
@@ -40,35 +28,22 @@ class MaterialSearch extends Material
      */
     public function search($params)
     {
-        $query = Material::find();
-
-        // add conditions that should always apply here
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
         $this->load($params);
 
-        if (!$this->validate()) {
-            // uncomment the following line if you do not want to return any records when validation fails
-            // $query->where('0=1');
-            return $dataProvider;
+        if($this->title){
+            $query =  Material::find()
+                ->joinWith('category')
+                ->joinWith('tag')
+                ->where(['ILIKE', 'materials.author', $this->title])
+                ->orWhere(['ILIKE', 'materials.title', $this->title])
+                ->orWhere(['ILIKE', 'categories.title', $this->title])
+                ->orWhere(['ILIKE', 'tags.title', $this->title]);
+        } else{
+            $query =  Material::find();
         }
 
-        // grid filtering conditions
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'updated_at' => $this->updated_at,
-            'created_at' => $this->created_at,
-            'type_id' => $this->type_id,
-            'category_id' => $this->category_id,
+        return new ActiveDataProvider([
+            'query' => $query,
         ]);
-
-        $query->andFilterWhere(['ilike', 'title', $this->title])
-            ->andFilterWhere(['ilike', 'description', $this->description])
-            ->andFilterWhere(['ilike', 'author', $this->author]);
-
-        return $dataProvider;
     }
 }

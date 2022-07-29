@@ -26,6 +26,22 @@ class Material extends BaseActiveRecord
         return '{{materials}}';
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function rules(): array
+    {
+        return [
+            [['title'], 'safe'],
+            [['type_id', 'category_id'], 'integer'],
+            [['title','type_id', 'category_id'], 'required', 'message' => 'Пожалуйста, заполните поле'],
+            [['title', 'description', 'author'], 'string', 'max' => 255],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::class, 'targetAttribute' => ['type_id' => 'id']],
+        ];
+    }
+
+
     public function getType()
     {
         return $this->hasOne(Type::class, ['id' => 'type_id']);
