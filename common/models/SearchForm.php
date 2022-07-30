@@ -7,7 +7,7 @@ namespace common\models;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class SearchForm extends Model
+final class SearchForm extends Model
 {
     public string $query = '';
 
@@ -38,5 +38,4 @@ class SearchForm extends Model
             'query' => $query,
         ]);
     }
-
 }

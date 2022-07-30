@@ -2,11 +2,13 @@
 
 namespace frontend\controllers;
 
+use common\models\BindTagToMaterialForm;
 use common\models\Category;
 use common\models\Material;
 use common\models\SearchForm;
 use common\models\Tag;
 use common\models\Type;
+use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -61,7 +63,10 @@ final class MaterialController extends Controller
      */
     public function actionView($id)
     {
+        $bindModel = new BindTagToMaterialForm();
+
         return $this->render('view', [
+            'bindModel' => $bindModel,
             'material' => $this->findModel($id),
             'tag' => new Tag(),
         ]);
@@ -129,6 +134,33 @@ final class MaterialController extends Controller
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
+    }
+
+    public function actionBindTag()
+    {
+        $model = new BindTagToMaterialForm();
+
+        $model->load(Yii::$app->request->post());
+        $model->bind();
+
+        return $this->render('view', [
+            'bindModel' => $model,
+            'material' => $this->findModel($model->id),
+            'tag' => new Tag(),
+        ]);
+    }
+
+    public function actionUnbindTag()
+    {
+        $materialId = $this->request->get('materialId');
+        $tagId = $this->request->get('tagId');
+
+        Yii::$app->db->createCommand('DELETE FROM "material_tag" WHERE material_id=:materialId AND tag_id=:tagId', [
+            ':materialId' => $materialId,
+            ':tagId' => $tagId,
+        ])->execute();
+
+        return $this->redirect(["material/view?id={$materialId}"]);
     }
 
     /**
