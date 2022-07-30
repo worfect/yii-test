@@ -33,14 +33,7 @@ services:
       # Mount source-code for development
       - ./:/app
     environment:
-      PHP_IDE_CONFIG: serverName=TEST
-
-#  cli:
-#    build:
-#      context: ./docker
-#      dockerfile: cli/Dockerfile
-#    volumes:
-#      - ./:/app
+      PHP_IDE_CONFIG: serverName=APP
 
   postgres:
     image: postgres:14.3-alpine
