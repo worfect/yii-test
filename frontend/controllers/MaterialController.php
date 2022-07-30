@@ -4,7 +4,7 @@ namespace frontend\controllers;
 
 use common\models\Category;
 use common\models\Material;
-use common\models\MaterialSearch;
+use common\models\SearchForm;
 use common\models\Tag;
 use common\models\Type;
 use yii\filters\VerbFilter;
@@ -44,7 +44,7 @@ final class MaterialController extends Controller
      */
     public function actionIndex()
     {
-        $searchModel = new MaterialSearch();
+        $searchModel = new SearchForm();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [

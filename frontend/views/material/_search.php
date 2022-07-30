@@ -3,7 +3,7 @@
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\MaterialSearch */
+/* @var $model common\models\SearchForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
     'method' => 'get',
 ]); ?>
 
-        <?php echo $form->field($model, 'title', [
+        <?php echo $form->field($model, 'query', [
             'options' => [
                 'class' => 'input-group mb-3',
             ],
@@ -20,5 +20,3 @@ use yii\widgets\ActiveForm;
         ]); ?>
 
 <?php ActiveForm::end();
-
-
