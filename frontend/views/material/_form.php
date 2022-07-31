@@ -14,7 +14,7 @@ use yii\widgets\ActiveForm;
     'fieldConfig' => ['options' => ['class' => 'form-floating mb-3']],
 ]); ?>
 
-    <?php echo $form->field($material, 'type_id', [
+    <?= $form->field($material, 'type_id', [
         'template' => '{input}{error}<label for="floatingSelectType">Тип</label>',
         'inputOptions' => [
             'id' => 'floatingSelectType',
@@ -26,7 +26,7 @@ use yii\widgets\ActiveForm;
         ['prompt' => 'Выберите тип']
     )->label(false); ?>
 
-    <?php echo $form->field($material, 'category_id', [
+    <?= $form->field($material, 'category_id', [
         'template' => '{input}{error}<label for="floatingSelectType">Категория</label>',
         'inputOptions' => [
             'id' => 'floatingSelectCategory',
@@ -38,7 +38,7 @@ use yii\widgets\ActiveForm;
         ['prompt' => 'Выберите категорию']
     )->label(false); ?>
 
-    <?php echo $form->field($material, 'title', [
+    <?= $form->field($material, 'title', [
         'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
         'inputOptions' => [
             'id' => 'floatingTitle',
@@ -47,7 +47,7 @@ use yii\widgets\ActiveForm;
         ],
     ])->textInput(['maxlength' => true])->label(false); ?>
 
-    <?php echo $form->field($material, 'author', [
+    <?= $form->field($material, 'author', [
         'template' => '{input}{error}<label for="floatingSelectType">Автор</label>',
         'inputOptions' => [
             'id' => 'floatingAuthor',
@@ -56,7 +56,7 @@ use yii\widgets\ActiveForm;
         ],
     ])->textInput(['maxlength' => true])->label(false); ?>
 
-    <?php echo $form->field($material, 'description', [
+    <?= $form->field($material, 'description', [
         'template' => '{input}{error}<label for="floatingSelectType">Описание</label>',
         'inputOptions' => [
             'id' => 'floatingDescription',
@@ -66,7 +66,7 @@ use yii\widgets\ActiveForm;
     ])->textInput(['maxlength' => true])->textarea(['rows' => '6'])->label(false); ?>
 
     <div class="form-group">
-        <?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
     </div>
 
 <?php ActiveForm::end();

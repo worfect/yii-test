@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace common\models;
 
 use yii\db\ActiveQuery;
@@ -22,7 +24,7 @@ final class Category extends BaseActiveRecord
     /**
      * {@inheritdoc}
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['title'], 'required', 'message' => 'Пожалуйста, заполните поле'],

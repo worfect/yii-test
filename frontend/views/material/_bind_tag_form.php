@@ -9,7 +9,6 @@ use yii\widgets\ActiveForm;
 ?>
 
 <?php $form = ActiveForm::begin([
-    'action' => ['bind-tag'],
     'options' => [
         'class' => 'form-floating mb-3',
         'id' => 'add-tag-form',
@@ -18,8 +17,8 @@ use yii\widgets\ActiveForm;
 
 <h3>Теги</h3>
 
-    <?php echo $form->field($model, 'id')->hiddenInput(['value' => $material->id])->label(false); ?>
-    <?php echo $form->field($model, 'tagId', [
+    <?= $form->field($model, 'id')->hiddenInput(['value' => $material->id])->label(false); ?>
+    <?= $form->field($model, 'tagId', [
         'options' => [
             'class' => 'input-group mb-3',
         ],

@@ -12,7 +12,6 @@ return
                     __DIR__ . '/common/fixtures',
                     __DIR__ . '/common/models',
                     __DIR__ . '/frontend/controllers',
-                    __DIR__ . '/frontend/views',
                 ])
                 ->append([
                     __FILE__,
@@ -45,7 +44,7 @@ return
 
             'yoda_style' => false,
 
-            'final_class' => true,
+            'final_class' => false,
             'self_static_accessor' => true,
 
             'static_lambda' => true,

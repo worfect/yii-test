@@ -12,7 +12,7 @@ use yii\widgets\ActiveForm;
     'method' => 'get',
 ]); ?>
 
-        <?php echo $form->field($model, 'query', [
+        <?= $form->field($model, 'query', [
             'options' => [
                 'class' => 'input-group mb-3',
             ],

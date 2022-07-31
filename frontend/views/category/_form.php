@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
     'fieldConfig' => ['options' => ['class' => 'form-floating mb-3']],
 ]); ?>
 
-<?php echo $form->field($model, 'title', [
+<?= $form->field($model, 'title', [
     'template' => '{input}{error}<label for="floatingSelectType">Название</label>',
     'inputOptions' => [
         'id' => 'floatingSelectCategory',
@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 ]); ?>
 
 <div class="form-group">
-    <?php echo Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
+    <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
 </div>
 
 <?php ActiveForm::end();

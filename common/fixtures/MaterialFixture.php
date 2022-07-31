@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace common\fixtures;
 
 use Faker\Factory;
@@ -25,6 +27,7 @@ final class MaterialFixture extends ActiveFixture
                 ];
             }
             $fixtures[] = [
+//              'id' => 1
                 'title' => $faker->text(20),
                 'description' => $faker->realText(100),
                 'type_id' => rand(1, 5),

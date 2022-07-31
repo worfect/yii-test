@@ -8,11 +8,11 @@ use yii\helpers\Html;
 $this->title = 'Добавить тег';
 ?>
 
-<h1 class="my-md-5 my-4"><?php echo Html::encode($this->title); ?></h1>
+<h1 class="my-md-5 my-4"><?= Html::encode($this->title); ?></h1>
 
 <div class="row">
     <div class="col-lg-5 col-md-8">
-        <?php echo $this->render('_form', [
+        <?= $this->render('_form', [
             'model' => $model,
         ]); ?>
     </div>

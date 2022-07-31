@@ -1,12 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\controllers;
 
 use common\models\Tag;
 use yii\data\ActiveDataProvider;
+use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * TagController implements the CRUD actions for Tag model.
@@ -28,20 +32,13 @@ final class TagController extends Controller
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
-                        'bind' => ['POST'],
-                        'unbind' => ['POST'],
                     ],
                 ],
             ]
         );
     }
 
-    /**
-     * Lists all Tag models.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $dataProvider = new ActiveDataProvider([
             'query' => Tag::find(),
@@ -52,12 +49,7 @@ final class TagController extends Controller
         ]);
     }
 
-    /**
-     * Creates a new Tag model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
+    public function actionCreate(): Response|string
     {
         $model = new Tag();
 
@@ -74,14 +66,7 @@ final class TagController extends Controller
         ]);
     }
 
-    /**
-     * Updates an existing Tag model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     * @return string|\yii\web\Response
-     */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): Response|string
     {
         $model = $this->findModel($id);
 
@@ -95,13 +80,9 @@ final class TagController extends Controller
     }
 
     /**
-     * Deletes an existing Tag model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     * @return \yii\web\Response
+     * @throws NotFoundHttpException|StaleObjectException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id): Response
     {
         $this->findModel($id)->delete();
 
@@ -109,13 +90,9 @@ final class TagController extends Controller
     }
 
     /**
-     * Finds the Tag model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
      * @throws NotFoundHttpException if the model cannot be found
-     * @return Tag the loaded model
      */
-    protected function findModel($id)
+    protected function findModel(int $id): Tag
     {
         if (($model = Tag::findOne(['id' => $id])) !== null) {
             return $model;

@@ -41,7 +41,6 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/' => '/material/index'
             ],
         ],
     ],

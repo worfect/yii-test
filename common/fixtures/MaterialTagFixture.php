@@ -12,7 +12,7 @@ final class MaterialTagFixture extends ActiveFixture
     {
         $fixtures = [];
 
-        for ($i = 30; $i > 10; --$i) {
+        for ($i = 20; $i > 10; --$i) {
             $fixtures[] = [
                 'material_id' => $i,
                 'tag_id' => random_int(1, 10),

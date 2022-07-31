@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace common\fixtures;
 
 use Faker\Factory;
@@ -16,6 +18,7 @@ final class TagFixture extends ActiveFixture
 
         for ($i = 10; $i > 0; --$i) {
             $fixtures[] = [
+//              'id' => 1
                 'title' => $faker->unique()->word(),
             ];
         }

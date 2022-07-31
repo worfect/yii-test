@@ -1,17 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace frontend\controllers;
 
 use common\models\BindTagToMaterialForm;
 use common\models\Category;
+use common\models\LinkForm;
 use common\models\Material;
 use common\models\SearchForm;
 use common\models\Tag;
 use common\models\Type;
 use Yii;
+use yii\db\Exception;
+use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
+use yii\web\Response;
 
 /**
  * MaterialController implements the CRUD actions for Material model.
@@ -21,30 +27,28 @@ final class MaterialController extends Controller
     /**
      * {@inheritDoc}
      */
-    public function behaviors()
+    public function behaviors(): array
     {
         return array_merge(
             parent::behaviors(),
             [
                 'verbs' => [
-                    'class' => VerbFilter::className(),
+                    'class' => VerbFilter::class,
                     'actions' => [
                         'index' => ['GET'],
+                        'view' => ['GET', 'POST'],
                         'create' => ['GET', 'POST'],
                         'update' => ['GET', 'POST'],
                         'delete' => ['POST'],
+                        'unbind-tag' => ['POST'],
+                        'delete-link' => ['POST'],
                     ],
                 ],
             ]
         );
     }
 
-    /**
-     * Lists all Material models.
-     *
-     * @return string
-     */
-    public function actionIndex()
+    public function actionIndex(): string
     {
         $searchModel = new SearchForm();
         $dataProvider = $searchModel->search($this->request->queryParams);
@@ -56,28 +60,31 @@ final class MaterialController extends Controller
     }
 
     /**
-     * Displays a single Material model.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     * @return string
+     * @throws NotFoundHttpException|Exception if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView(int $id): string
     {
         $bindModel = new BindTagToMaterialForm();
+        $linkModel = new LinkForm();
+
+        if ($this->request->isPost) {
+            if ($bindModel->load(Yii::$app->request->post())) {
+                $bindModel->bind();
+            }
+            if ($linkModel->load(Yii::$app->request->post())) {
+                $linkModel->action();
+            }
+        }
 
         return $this->render('view', [
+            'linkModel' => $linkModel,
             'bindModel' => $bindModel,
             'material' => $this->findModel($id),
             'tag' => new Tag(),
         ]);
     }
 
-    /**
-     * Creates a new Material model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return string|\yii\web\Response
-     */
-    public function actionCreate()
+    public function actionCreate(): Response|string
     {
         $category = new Category();
         $type = new Type();
@@ -99,13 +106,9 @@ final class MaterialController extends Controller
     }
 
     /**
-     * Updates an existing Material model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param int $id
      * @throws NotFoundHttpException if the model cannot be found
-     * @return string|\yii\web\Response
      */
-    public function actionUpdate($id)
+    public function actionUpdate(int $id): Response|string
     {
         $category = new Category();
         $type = new Type();
@@ -123,34 +126,21 @@ final class MaterialController extends Controller
     }
 
     /**
-     * Deletes an existing Material model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     * @return \yii\web\Response
+     * @throws NotFoundHttpException|StaleObjectException if the model cannot be found
      */
-    public function actionDelete($id)
+    public function actionDelete(int $id): Response
     {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
 
-    public function actionBindTag()
-    {
-        $model = new BindTagToMaterialForm();
 
-        $model->load(Yii::$app->request->post());
-        $model->bind();
-
-        return $this->render('view', [
-            'bindModel' => $model,
-            'material' => $this->findModel($model->id),
-            'tag' => new Tag(),
-        ]);
-    }
-
-    public function actionUnbindTag()
+    /**
+     * Куда бы его деть?
+     *
+     */
+    public function actionUnbindTag(): Response
     {
         $materialId = $this->request->get('materialId');
         $tagId = $this->request->get('tagId');
@@ -164,13 +154,33 @@ final class MaterialController extends Controller
     }
 
     /**
-     * Finds the Material model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param int $id
-     * @throws NotFoundHttpException if the model cannot be found
-     * @return Material the loaded model
+     * И его тоже.
+     *
      */
-    protected function findModel($id)
+    public function actionDeleteLink(): Response
+    {
+        $linkId = $this->request->get('linkId');
+        $materialId = $this->request->get('materialId');
+
+        $material = Material::findOne($materialId);
+        $links = json_decode($material->links_json, true);
+
+        foreach ($links as $key => $link) {
+            if ($link['id'] === (int)$linkId) {
+                unset($links[$key]);
+            }
+        }
+
+        $material->links_json = json_encode($links);
+        $material->save();
+
+        return $this->redirect(["material/view?id={$materialId}"]);
+    }
+
+    /**
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel(int $id): Material
     {
         if (($model = Material::findOne(['id' => $id])) !== null) {
             return $model;

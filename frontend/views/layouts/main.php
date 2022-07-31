@@ -12,12 +12,12 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage(); ?>
 <!DOCTYPE html>
-<html lang="<?php echo Yii::$app->language; ?>" class="h-100">
+<html lang="<?= Yii::$app->language; ?>" class="h-100">
 <head>
-    <meta charset="<?php echo Yii::$app->charset; ?>">
+    <meta charset="<?= Yii::$app->charset; ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags(); ?>
-    <title><?php echo Html::encode($this->title); ?></title>
+    <title><?= Html::encode($this->title); ?></title>
     <?php $this->head(); ?>
 </head>
 <body>
@@ -44,14 +44,14 @@ echo Nav::widget([
 NavBar::end();
 ?>
             <div class="container">
-                <?php echo common\widgets\Alert::widget(); ?>
-                <?php echo $content; ?>
+                <?= common\widgets\Alert::widget(); ?>
+                <?= $content; ?>
             </div>
         </div>
         <footer class="footer py-4 mt-5 bg-light">
             <div class="container">
                 <div class="row">
-                    <div class="col text-muted"><?php echo Yii::$app->name; ?></div>
+                    <div class="col text-muted"><?= Yii::$app->name; ?></div>
                 </div>
             </div>
         </footer>

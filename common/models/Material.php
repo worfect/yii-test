@@ -1,6 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace common\models;
+
+use yii\db\ActiveQuery;
 
 /**
  * Material model.
@@ -35,23 +39,27 @@ class Material extends BaseActiveRecord
             [['type_id', 'category_id'], 'integer'],
             [['title', 'type_id', 'category_id'], 'required', 'message' => 'Пожалуйста, заполните поле'],
             [['title', 'description', 'author'], 'string', 'max' => 255],
-            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => ['category_id' => 'id']],
-            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::class, 'targetAttribute' => ['type_id' => 'id']],
+            [['category_id'], 'exist', 'skipOnError' => true, 'targetClass' => Category::class, 'targetAttribute' => [
+                'category_id' => 'id']
+            ],
+            [['type_id'], 'exist', 'skipOnError' => true, 'targetClass' => Type::class, 'targetAttribute' => [
+                'type_id' => 'id']
+            ],
         ];
     }
 
-    public function getType()
+    public function getType(): ActiveQuery
     {
         return $this->hasOne(Type::class, ['id' => 'type_id']);
     }
 
-    public function getTag()
+    public function getTag(): ActiveQuery
     {
         return $this->hasMany(Tag::class, ['id' => 'tag_id'])
             ->viaTable('material_tag', ['material_id' => 'id']);
     }
 
-    public function getCategory()
+    public function getCategory(): ActiveQuery
     {
         return $this->hasOne(Category::class, ['id' => 'category_id']);
     }

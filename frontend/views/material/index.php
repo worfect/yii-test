@@ -11,17 +11,17 @@ use yii\helpers\Html;
 $this->title = 'Материалы';
 ?>
 
-<h1 class="my-md-5 my-4"><?php echo Html::encode($this->title); ?></h1>
+<h1 class="my-md-5 my-4"><?= Html::encode($this->title); ?></h1>
 
-<?php echo Html::a('Добавить', ['create'], ['class' => 'btn btn-primary mb-4']); ?>
+<?= Html::a('Добавить', ['create'], ['class' => 'btn btn-primary mb-4']); ?>
 
 <div class="row">
     <div class="col-md-8">
-        <?php echo $this->render('_search', ['model' => $searchModel]); ?>
+        <?= $this->render('_search', ['model' => $searchModel]); ?>
     </div>
 </div>
 <div class="table-responsive">
-    <?php echo GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'tableOptions' => ['class' => 'table'],
         'layout' => '{items}',

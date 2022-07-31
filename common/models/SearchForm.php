@@ -17,7 +17,7 @@ final class SearchForm extends Model
     public function rules(): array
     {
         return [
-            ['query', 'safe'],
+            ['query', 'string'],
         ];
     }
 
@@ -29,7 +29,7 @@ final class SearchForm extends Model
 
         $query->joinWith('category')
             ->joinWith('tag')
-            ->where(['ILIKE', 'materials.author', $this->query])
+            ->andWhere(['ILIKE', 'materials.author', $this->query])
             ->orWhere(['ILIKE', 'materials.title', $this->query])
             ->orWhere(['ILIKE', 'categories.title', $this->query])
             ->orWhere(['ILIKE', 'tags.title', $this->query]);

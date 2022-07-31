@@ -9,20 +9,23 @@ use yii\widgets\ListView;
 $this->title = 'Категории';
 ?>
 
-<h1 class="my-md-5 my-4"><?php echo Html::encode($this->title); ?></h1>
+<h1 class="my-md-5 my-4"><?= Html::encode($this->title); ?></h1>
 
-<?php echo Html::a('Добавить', ['create'], ['class' => 'btn btn-primary mb-4']); ?>
+<?= Html::a('Добавить', ['create'], ['class' => 'btn btn-primary mb-4']); ?>
 
 <div class="row">
     <div class="col-md-6">
-        <?php echo ListView::widget([
+        <?= ListView::widget([
             'dataProvider' => $dataProvider,
-            'layout' => '<li class="list-group-item d-flex justify-content-between"><strong>Название</strong></li>{items}',
+            'layout' => '<li class="list-group-item d-flex justify-content-between">
+                        <strong>Название</strong></li>{items}',
             'options' => [
                 'tag' => 'ul',
                 'class' => 'list-group mb-4',
             ],
-            'itemOptions' => ['class' => 'list-group-item list-group-item-action d-flex justify-content-between'],
+            'itemOptions' => [
+                    'class' => 'list-group-item list-group-item-action d-flex justify-content-between'
+            ],
             'itemView' => '_item',
         ]); ?>
     </div>

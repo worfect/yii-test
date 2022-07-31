@@ -19,8 +19,7 @@ use yii\web\Controller;
 /**
  * Site controller.
  */
-final
-class SiteController extends Controller
+final class SiteController extends Controller
 {
     /**
      * {@inheritdoc}
@@ -76,7 +75,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        return $this->redirect('material/index');
     }
 
     /**
@@ -192,8 +191,8 @@ class SiteController extends Controller
      * Resets password.
      *
      * @param string $token
-     * @return mixed
      * @throws BadRequestHttpException
+     * @return mixed
      */
     public function actionResetPassword($token)
     {
@@ -218,8 +217,8 @@ class SiteController extends Controller
      * Verify email address.
      *
      * @param string $token
-     * @return yii\web\Response
      * @throws BadRequestHttpException
+     * @return yii\web\Response
      */
     public function actionVerifyEmail($token)
     {
