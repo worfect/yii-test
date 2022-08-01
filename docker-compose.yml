@@ -1,55 +1,74 @@
 version: "3.7"
-
 services:
 
-  webserver:
+  gateway:
     build:
-      context: ./docker/nginx
-    volumes:
-      - ./:/app
+      context: gateway/docker
+      dockerfile: nginx/Dockerfile
     ports:
+      - "80:80"
       - "81:81"
-      - "82:82"
-
-  backend:
-    build:
-      context: ./docker
-      dockerfile: backend/Dockerfile
-    volumes:
-      # Re-use local composer cache via host-volume
-      - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
-    environment:
-      PHP_IDE_CONFIG: serverName=TEST
 
   frontend:
     build:
-      context: ./docker
+      context: frontend/docker/nginx
+
+  frontend-node:
+    build:
+      context: frontend/docker/node
+    volumes:
+      - ./frontend:/app
+    command: npm run dev
+    tty: true
+
+  frontend-node-cli:
+    build:
+      context: frontend/docker/node
+    volumes:
+      - ./frontend:/app
+
+  api:
+    build:
+      context: api/docker
+      dockerfile: nginx/Dockerfile
+    volumes:
+      - ./api:/app
+
+  api-admin:
+    build:
+      context: api/docker
+      dockerfile: admin/Dockerfile
+    volumes:
+      - ~/.composer-docker/cache:/root/.composer/cache:delegated
+      - ./api:/app
+    environment:
+      PHP_IDE_CONFIG: serverName=TEST
+
+  api-frontend:
+    build:
+      context: api/docker
       dockerfile: frontend/Dockerfile
     volumes:
-      # Re-use local composer cache via host-volume
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
-      # Mount source-code for development
-      - ./:/app
+      - ./api:/app
     environment:
-      PHP_IDE_CONFIG: serverName=APP
+      PHP_IDE_CONFIG: serverName=TEST
 
-  postgres:
-    image: postgres:14.3-alpine
+  api-postgres:
+    image: postgres:12.2-alpine
     restart: always
     environment:
       POSTGRES_USER: app
       POSTGRES_PASSWORD: secret
       POSTGRES_DB: app
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - api-postgres:/var/lib/postgresql/data
     ports:
       - "54321:5432"
 
   adminer:
     build:
-      context: ./docker
+      context: api/docker
       dockerfile: adminer/Dockerfile
     ports:
       - "8080:8080"
@@ -63,4 +82,4 @@ networks:
         - subnet: 122.122.221.0/28
 
 volumes:
-  postgres:
+  api-postgres:
