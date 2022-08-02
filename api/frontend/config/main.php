@@ -15,11 +15,14 @@ return [
     'components' => [
         'request' => [
             'csrfParam' => '_csrf-frontend',
+            'parsers' => [
+                'application/json' => 'yii\web\JsonParser',
+            ]
         ],
         'user' => [
-            'identityClass' => 'common\models\User',
-            'enableAutoLogin' => true,
-            'identityCookie' => ['name' => '_identity-frontend', 'httpOnly' => true],
+            'identityClass' => 'frontend\domains\models\User',
+            'enableSession' => false,
+            'enableAutoLogin' => false,
         ],
         'session' => [
             // this is the name of the session cookie used for login on the frontend
@@ -41,6 +44,13 @@ return [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'auth' => 'site/login',
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => [
+                        'api', 'user'
+                    ],
+                ],
             ],
         ],
     ],

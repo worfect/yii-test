@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $model common\models\Tag */
+/* @var $model frontend\domains\models\Tag */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

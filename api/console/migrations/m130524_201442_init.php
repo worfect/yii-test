@@ -4,30 +4,24 @@ use yii\db\Migration;
 
 final class m130524_201442_init extends Migration
 {
-    public function up()
+    public function safeUp()
     {
-        $tableOptions = null;
-        if ($this->db->driverName === 'mysql') {
-            // http://stackoverflow.com/questions/766809/whats-the-difference-between-utf8-general-ci-and-utf8-unicode-ci
-            $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
-        }
-
-        $this->createTable('{{%user}}', [
+        $this->createTable('user', [
             'id' => $this->primaryKey(),
             'username' => $this->string()->notNull()->unique(),
-            'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
-            'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
 
-            'status' => $this->smallInteger()->notNull()->defaultValue(10),
-            'created_at' => $this->integer()->notNull(),
-            'updated_at' => $this->integer()->notNull(),
-        ], $tableOptions);
+            'updated_at' => $this->integer(),
+            'created_at' => $this->integer()->defaultExpression(time()),
+            'deleted_at' => $this->integer()->defaultExpression(0),
+            'created_by_id' => $this->integer(),
+            'updated_by_id' => $this->integer(),
+        ]);
     }
 
-    public function down()
+    public function safeDown()
     {
-        $this->dropTable('{{%user}}');
+        $this->dropTable('user');
     }
 }

@@ -3,9 +3,9 @@
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $material common\models\Material */
-/* @var $tag common\models\Tag */
-/* @var $model common\models\BindTagToMaterialForm */
+/* @var $material frontend\domains\models\Material */
+/* @var $tag frontend\domains\models\Tag */
+/* @var $model frontend\domains\forms\BindTagToMaterialForm */
 ?>
 
 <?php $form = ActiveForm::begin([

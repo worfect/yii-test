@@ -14,14 +14,19 @@ final class m220727_105400_create_materials_table extends Migration
     {
         $this->createTable('{{%materials}}', [
             'id' => $this->primaryKey(),
-            'updated_at' => $this->timestamp(),
-            'created_at' => $this->timestamp()->defaultExpression('CURRENT_TIMESTAMP'),
+
             'type_id' => $this->integer()->notNull(),
             'category_id' => $this->integer()->notNull(),
             'title' => $this->string()->notNull(),
             'description' => $this->string(),
             'author' => $this->string(),
             'links_json' => $this->json(),
+
+            'updated_at' => $this->integer(),
+            'created_at' => $this->integer()->defaultExpression(time()),
+            'deleted_at' => $this->integer()->defaultExpression(0),
+            'created_by_id' => $this->integer(),
+            'updated_by_id' => $this->integer(),
         ]);
 
         $this->addForeignKey(

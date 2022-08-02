@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace frontend\controllers;
 
-use common\models\BindTagToMaterialForm;
-use common\models\Category;
-use common\models\LinkForm;
-use common\models\Material;
-use common\models\SearchForm;
-use common\models\Tag;
-use common\models\Type;
+use frontend\domains\forms\BindTagToMaterialForm;
+use frontend\domains\forms\LinkForm;
+use frontend\domains\forms\SearchForm;
+use frontend\domains\models\Category;
+use frontend\domains\models\Material;
+use frontend\domains\models\Tag;
+use frontend\domains\models\Type;
 use Yii;
 use yii\db\Exception;
 use yii\db\StaleObjectException;

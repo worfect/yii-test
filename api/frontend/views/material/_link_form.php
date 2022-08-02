@@ -3,8 +3,8 @@
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $material common\models\Material */
-/* @var $model common\models\LinkForm */
+/* @var $material frontend\domains\models\Material */
+/* @var $model frontend\domains\forms\LinkForm */
 ?>
 
 <div class="modal fade" id="linkModalToggle" aria-hidden="true" aria-labelledby=""

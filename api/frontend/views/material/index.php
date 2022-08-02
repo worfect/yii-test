@@ -5,7 +5,7 @@ use yii\grid\GridView;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\SearchForm */
+/* @var $searchModel frontend\domains\models\SearchForm */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
 $this->title = 'Материалы';

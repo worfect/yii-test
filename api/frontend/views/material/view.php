@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $material common\models\Material */
-/* @var $tag common\models\Tag */
-/* @var $bindModel common\models\BindTagToMaterialForm */
-/* @var $linkModel common\models\LinkForm */
+/* @var $material frontend\domains\models\Material */
+/* @var $tag frontend\domains\models\Tag */
+/* @var $bindModel frontend\domains\forms\BindTagToMaterialForm */
+/* @var $linkModel frontend\domains\forms\LinkForm */
 
 $this->title = $material->title;
 ?>

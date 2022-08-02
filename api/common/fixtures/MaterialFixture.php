@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace common\fixtures;
 
 use Faker\Factory;
+use frontend\domains\models\Material;
 use yii\test\ActiveFixture;
 
 final class MaterialFixture extends ActiveFixture
 {
-    public $modelClass = 'common\models\Material';
+    public $modelClass = Material::class;
 
     protected function getData(): array
     {

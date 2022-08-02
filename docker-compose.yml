@@ -8,6 +8,7 @@ services:
     ports:
       - "80:80"
       - "81:81"
+      - "82:82"
 
   frontend:
     build:
@@ -42,7 +43,7 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./api:/app
     environment:
-      PHP_IDE_CONFIG: serverName=TEST
+      PHP_IDE_CONFIG: serverName=APP
 
   api-frontend:
     build:
@@ -52,7 +53,7 @@ services:
       - ~/.composer-docker/cache:/root/.composer/cache:delegated
       - ./api:/app
     environment:
-      PHP_IDE_CONFIG: serverName=TEST
+      PHP_IDE_CONFIG: serverName=APP
 
   api-postgres:
     image: postgres:12.2-alpine

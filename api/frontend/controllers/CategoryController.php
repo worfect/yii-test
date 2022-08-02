@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace frontend\controllers;
 
-use common\models\Category;
+use frontend\domains\models\Category;
 use Yii;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;

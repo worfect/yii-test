@@ -4,9 +4,9 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $material common\models\Material */
-/* @var $type common\models\Type */
-/* @var $category common\models\Category */
+/* @var $material frontend\domains\models\Material */
+/* @var $type frontend\domains\models\Type */
+/* @var $category frontend\domains\models\Category */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

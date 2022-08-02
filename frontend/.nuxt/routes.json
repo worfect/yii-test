@@ -1,5 +1,26 @@
 [
   {
+    "name": "login",
+    "path": "/login",
+    "component": "/app/pages/login.vue",
+    "chunkName": "pages/login",
+    "_name": "_10ba8d22"
+  },
+  {
+    "name": "material",
+    "path": "/material",
+    "component": "/app/pages/material.vue",
+    "chunkName": "pages/material",
+    "_name": "_476a8991"
+  },
+  {
+    "name": "secret",
+    "path": "/secret",
+    "component": "/app/pages/secret.vue",
+    "chunkName": "pages/secret",
+    "_name": "_10fbb31a"
+  },
+  {
     "name": "index",
     "path": "/",
     "component": "/app/pages/index.vue",

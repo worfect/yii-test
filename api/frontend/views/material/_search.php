@@ -3,7 +3,7 @@
 use yii\widgets\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\SearchForm */
+/* @var $model frontend\domains\forms\SearchForm */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 

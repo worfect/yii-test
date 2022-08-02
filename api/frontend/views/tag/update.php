@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model common\models\Tag */
+/* @var $model frontend\domains\models\Tag */
 
 $this->title = 'Редактировать тег';
 ?>

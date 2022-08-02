@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace frontend\controllers;
 
-use common\models\Tag;
+use frontend\domains\models\Tag;
 use yii\data\ActiveDataProvider;
 use yii\db\StaleObjectException;
 use yii\filters\VerbFilter;

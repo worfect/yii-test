@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-/* @var $model common\models\Tag */
+/* @var $model frontend\domains\models\Tag */
 ?>
 
 <span class="me-3">

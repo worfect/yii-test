@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace common\fixtures;
 
 use Faker\Factory;
+use frontend\domains\models\Tag;
 use yii\test\ActiveFixture;
 
 final class TagFixture extends ActiveFixture
 {
-    public $modelClass = 'common\models\Tag';
+    public $modelClass = Tag::class;
 
     protected function getData(): array
     {

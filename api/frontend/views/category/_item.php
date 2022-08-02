@@ -1,7 +1,7 @@
 <?php
 use yii\helpers\Html;
 
-/* @var $model common\models\Category */
+/* @var $model frontend\domains\models\Category */
 ?>
 
 <span class="me-3">

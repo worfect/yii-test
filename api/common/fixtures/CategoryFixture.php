@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace common\fixtures;
 
 use Faker\Factory;
+use frontend\domains\models\Category;
 use yii\test\ActiveFixture;
 
 final class CategoryFixture extends ActiveFixture
 {
-    public $modelClass = 'common\models\Category';
+    public $modelClass = Category::class;
 
     protected function getData(): array
     {
